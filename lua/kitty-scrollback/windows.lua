@@ -47,14 +47,11 @@ M.paste_winopts = function(row, col, height_offset)
   end
   if col then
     winopts.col = col
-    winopts.width = M.size(vim.o.columns, vim.o.columns - col)
-    if winopts.width < 0 then
-      -- current line is larger than window, put window below current line
-      vim.fn.setcursorcharpos({ vim.fn.line('.'), 0 })
-      ksb_util.restore_and_redraw()
-      winopts.width = vim.o.columns - 1
-      winopts.col = 0
-    end
+
+    vim.fn.setcursorcharpos({ vim.fn.line('.'), 0 })
+    ksb_util.restore_and_redraw()
+    winopts.width = vim.o.columns - 1
+    winopts.col = 0
   end
 
   local winopts_overrides = opts.paste_window.winopts_overrides
